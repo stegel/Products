@@ -1,0 +1,15 @@
+<table>
+	<thead>
+		<tr>
+			<th>Categories</th>
+			<th></th>
+		</tr>
+	</thead>
+<% @categories.each do |category| %>
+	<tr>
+		<td><%= category.name %></td>
+		<td><%= link_to "Edit", edit_admin_category_url(category)  %> | <%= link_to "Subcategories", admin_category_subcategories_url(category) %></td>
+	</tr>
+<% end %>
+</table>
+<%= link_to "Add Partner", new_admin_partner_url  %>
