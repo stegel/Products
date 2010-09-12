@@ -6,19 +6,29 @@ class ProductsExtension < Radiant::Extension
   description "Display a list of product subcategories with a rotating image"
   url "http://yourwebsite.com/products"
   
-  # extension_config do |config|
-  #   config.gem 'some-awesome-gem
-  #   config.after_initialize do
-  #     run_something
-  #   end
-  # end
 
-  # See your config/routes.rb file in this extension to define custom routes
+   define_routes do |map|
+    
+    map.namespace :admin do |admin|
+      admin.resources :categories, :has_many => :subcategories
+
+	admin.resources :subcategories
+	admin.resources :brands
+    end
+
+    map.resources :categories, :has_many => :subcategories
+	map.resources :subcategories, [:belongs_to => :categories, :has_many => :brands]
+	map.resources :brands, :has_and_belongs_to_many => :subcategories
+	
+  end
   
   def activate
     # tab 'Content' do
     #   add_item "Products", "/admin/products", :after => "Pages"
     # end
+	tab 'Manage Site' do
+		add_item('Products','/admin/categories')
+	end
 	ProductPage
 	CategoryPage
 	Page.class_eval do
