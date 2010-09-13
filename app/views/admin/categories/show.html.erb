@@ -1,3 +1,21 @@
 <h1><%= @category.name %></h1>
 <p><%= @category.description %></p>
-<%= link_to "Edit", edit_admin_category_url(@category) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Delete", admin_category_url(@category), :method => :delete %>
+
+<% if !@category.subcategories.empty? %>
+<table>
+	<thead>
+		<tr>
+			<th>Subcategory</th>
+		</tr>
+	<% @category.subcategories.each do |subcategory| %>
+		<tr>
+			<td><%= subcategory.name %></td>
+		</tr>
+	<% end %>
+</table>
+<% else %>
+<%= link_to "Add Subcategory", new_admin_category_subcategory_url(@category.id) %><br />
+<% end %>	
+<div class="manage_self">
+	<%= link_to "Edit", edit_admin_category_url(@category) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Delete", admin_category_url(@category), :method => :delete %>
+</div>
