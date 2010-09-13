@@ -1,4 +1,5 @@
 <h1><%= @subcategory.name%></h1>
+<h2>Category: <%= @subcategory.category.name %></h2>
 <% if !@subcategory.brands.empty? %>
 	<table>
 		<thead>
@@ -9,7 +10,7 @@
 			</tr>
 		</thead>
 	
-	<% @brands.each do |brand| %>
+	<% @subcategory.brands.each do |brand| %>
 		<tr>
 			<td><%= brand.name%></td>
 			<td><%= brand.website %></td>
@@ -18,5 +19,5 @@
 	<% end%>
 	</table>
 <% else %>
-<%= link_to "Add New Brand", new_admin_brand_url %> | <%= link_to "View Existing Brands", admin_brands_url %>
+<%= link_to "Add New Brand", new_admin_subcategory_brand_url(@subcategory.id) %> | <%= link_to "Edit Subcategory", edit_admin_subcategory_url(@subcategory.id) %>
 <% end %>

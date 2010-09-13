@@ -1,0 +1,16 @@
+	<%= f.label "Subcategory Name" %>
+	<%= f.text_field :name %><br />
+	
+	<%= f.label 'Category' %>
+	<%= f.select :category_id, options_for_select(@categories.map{|category| [category.name, category.id]}, params[:category_id].to_i) %><br />
+	
+	<% if !brands.empty? %>
+	<h2>Select Brands</h2>
+		<% brands.each do |brand| %>
+			<%= check_box_tag "subcategory[brand_ids][]", brand.id, subcategory.brands.include?(brand) %>
+			<%= brand.name %>
+		<% end%>
+		<br />
+	<% end %>
+
+	<%= f.submit %>

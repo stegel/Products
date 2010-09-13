@@ -1,0 +1,6 @@
+<% form_for :subcategory, :url => admin_subcategory_url(@subcategory),  :html => { :method => "put"} do |f| %>
+
+<%= render :partial => "form", :locals => {:f => f, :subcategory => @subcategory, :brands => @brands} %>
+
+<% end %>
+

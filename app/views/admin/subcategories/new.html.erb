@@ -1,0 +1,6 @@
+<% form_for :subcategory, :url => admin_subcategories_url do |f| %>
+
+<%= render :partial => "form", :locals => {:f => f} %>
+
+<% end %>
+<%= params[:category_id]%>

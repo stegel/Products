@@ -6,16 +6,21 @@
 	<thead>
 		<tr>
 			<th>Subcategory</th>
+			<th>Manage</th>
 		</tr>
 	<% @category.subcategories.each do |subcategory| %>
 		<tr>
-			<td><%= subcategory.name %></td>
+			<td><%= link_to subcategory.name, admin_subcategory_url(subcategory) %></td>
+			<td>
+				<%= link_to "Delete Subcategory", admin_subcategory_url(subcategory.id), :method => :delete %>
+			</td>
+			
 		</tr>
 	<% end %>
 </table>
 <% else %>
-<%= link_to "Add Subcategory", new_admin_category_subcategory_url(@category.id) %><br />
 <% end %>	
+<%= link_to "Add Subcategory", new_admin_category_subcategory_url(@category.id) %><br />
 <div class="manage_self">
 	<%= link_to "Edit", edit_admin_category_url(@category) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Delete", admin_category_url(@category), :method => :delete %>
 </div>

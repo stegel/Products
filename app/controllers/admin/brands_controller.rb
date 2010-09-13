@@ -21,6 +21,10 @@ class Admin::BrandsController < ApplicationController
   
   def new
     @brand = Brand.new
+    
+    if params[:subcategory_id]
+      @brand.subcategory_ids = params[:subcategory_id]
+    end
     @subcategories = Subcategory.find(:all)
   end
   
@@ -41,7 +45,8 @@ class Admin::BrandsController < ApplicationController
   end
   
   def update
-    #params[:brand][:subcategory_ids] ||= {}
+    params[:brand][:subcategory_ids] ||= {}
+    
     @brand = Brand.find(params[:id])
      
     respond_to do |format|
