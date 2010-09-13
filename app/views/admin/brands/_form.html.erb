@@ -1,0 +1,12 @@
+<%= f.label "Name" %>
+<%= f.text_field :name %><br />
+<%= f.label "Website" %>
+<%= f.text_field :website %><br />
+<h2>Select Subcategories</h2>
+<% subcategories.each do |subcategory| %>
+	<%= check_box_tag "brand[subcategory_ids][]", subcategory.id, @brand.subcategories.include?(subcategory) %>
+	<%= subcategory.name %>
+<% end%>
+<br />
+
+<%= f.submit %>

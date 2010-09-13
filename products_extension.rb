@@ -11,14 +11,12 @@ class ProductsExtension < Radiant::Extension
     
     map.namespace :admin do |admin|
       admin.resources :categories, :has_many => :subcategories
+  	  admin.resources :subcategories, :has_and_belongs_to_many => :brands
+      admin.resources :brands, :has_and_belongs_to_many => :subcategories
+	  end
 
-	admin.resources :subcategories
-	admin.resources :brands
-    end
-
-    map.resources :categories, :has_many => :subcategories
-	map.resources :subcategories, [:belongs_to => :categories, :has_many => :brands]
-	map.resources :brands, :has_and_belongs_to_many => :subcategories
+   
+	
 	
   end
   

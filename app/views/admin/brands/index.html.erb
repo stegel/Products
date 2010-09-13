@@ -1,0 +1,17 @@
+<table>
+	<thead>
+		<tr>
+			<th>Brand</th>
+			<th>Website</th>
+			<th>Manage</th>
+		</tr>
+	</thead>
+
+<% @brands.each do |brand| %>
+	<tr>
+		<td><%= brand.name%></td>
+		<td><%= link_to brand.website, brand.website %></td>
+		<td><%= link_to "Edit", edit_admin_brand_url(brand.id) %> | <%= link_to "Delete", admin_brand_url(brand.id), :method => :delete %></td>
+	</tr>
+<% end%>
+</table>

@@ -1,0 +1,19 @@
+<%= @brand.name %><br />
+<%= link_to @brand.website, @brand.website %>
+<h2>Subcategories</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Subcategory</th>
+			<th>Manage</th>
+		</tr>
+	</thead>
+<% @brand.subcategories.each do |subcategory| %>
+	<tr>
+		<td><%= subcategory.name%></td>
+		<td><%= link_to "Other Brands", admin_subcategory_brands_url(subcategory.id)%> | <%= link_to "Remove from Subcategory", admin_subcategory_brand_url(subcategory.id,@brand.id), :method => :delete %></td>
+	</tr>
+<% end %>
+</table>		
+
+<%= link_to "Edit Info", edit_admin_brand_url(@brand.id) %>

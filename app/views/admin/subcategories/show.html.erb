@@ -1,0 +1,22 @@
+<h1><%= @subcategory.name%></h1>
+<% if !@subcategory.brands.empty? %>
+	<table>
+		<thead>
+			<tr>
+				<th>Brand</th>
+				<th>Website</th>
+				<th>Manage</th>
+			</tr>
+		</thead>
+	
+	<% @brands.each do |brand| %>
+		<tr>
+			<td><%= brand.name%></td>
+			<td><%= brand.website %></td>
+			<td><%= link_to "View Brand", admin_brand_url(brand.id) %> | <%= link_to "Remove Brand",  admin_subcategory_brand_url(@subcategory.id,brand.id), :method => :delete %></td>
+		</tr>
+	<% end%>
+	</table>
+<% else %>
+<%= link_to "Add New Brand", new_admin_brand_url %> | <%= link_to "View Existing Brands", admin_brands_url %>
+<% end %>

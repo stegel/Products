@@ -1,0 +1,20 @@
+<%= @category.name %>
+<h2>Subcategories</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>	
+			<th>Brands</th>
+			<th></th>
+		</tr>
+	</thead>
+
+<% @subcategories.each do |sub| %>
+	<tr>
+		<td><%= sub.name %></td>
+		<td><%= link_to "View Brands", admin_subcategory_brands_url(sub.id) %></td>
+		<td><%= link_to "Delete Subcategory", admin_subcategory_url(sub.id), :method => :delete %></td>
+	</tr>
+<% end %>
+
+</table>
