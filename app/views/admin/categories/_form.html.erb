@@ -1,6 +1,13 @@
-	<%= f.label "Category Name" %>
-	<%= f.text_field :name %><br />
+	<p>
+		<%= f.label "Category Name" %>
+		<%= f.text_field :name %>
+	</p>
 	
-	<%= f.label 'Description' %>
-	<%= f.text_area :description, :rows => 5, :cols => 45%>
-	<%= f.submit %>
+	<p>	
+		<%= f.label 'Description' %>
+		<%= f.text_area :description, :rows => 5, :cols => 45%>
+	</p>
+	<p class="buttons">
+		<%= submit_tag "Save Category", :class => "button" %> or 
+		<%= link_to "Cancel", admin_categories_url %>
+	</p>

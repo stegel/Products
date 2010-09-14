@@ -1,3 +1,4 @@
+<h1>Edit @category.name</h1>
 <% form_for :category, :url => admin_category_url(@category),  :html => { :method => "put"} do |f| %>
 
 <%= render :partial => "form", :locals => {:f => f} %>

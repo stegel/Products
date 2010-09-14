@@ -1,14 +1,17 @@
-<table>
+<% include_stylesheet 'admin/products' %>
+
+<h1>Categories</h1>
+<table class="index">
 	<thead>
 		<tr>
-			<th>Categories</th>
-			<th></th>
+			<th>Category</th>
+			<th>Modify</th>
 		</tr>
 	</thead>
 <% @categories.each do |category| %>
 	<tr>
 		<td><%= link_to category.name, admin_category_url(category) %></td>
-		<td><%= link_to "Edit", edit_admin_category_url(category)  %> </td>
+		<td class="product-modify"><%= link_to "Edit", edit_admin_category_url(category)  %> </td>
 	</tr>
 <% end %>
 </table>

@@ -12,6 +12,7 @@ class Admin::SubcategoriesController < ApplicationController
   def new
     @subcategory = Subcategory.new
     @categories = Category.find(:all)
+    @brands = Brand.find(:all)
   end
   
   def create
