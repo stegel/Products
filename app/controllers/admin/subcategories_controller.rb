@@ -1,8 +1,13 @@
 class Admin::SubcategoriesController < ApplicationController
 
 	def index
-		@category = Category.find_by_id(params[:category_id])
-    @subcategories = @category.subcategories
+    if(params[:category_id]) 
+      @category = Category.find_by_id(params[:category_id])
+      @subcategories = @category.subcategories
+    else
+      @subcategories = Subcategory.find(:all)
+    end
+  
 	end
   
   def show

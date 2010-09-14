@@ -1,20 +1,39 @@
-<%= @category.name %>
-<h2>Subcategories</h2>
-<table>
+<% include_stylesheet 'admin/products' %>
+<% if !@category.nil? %>
+	<h1><%= @category.name %></h1>
+	<h2>Subcategories</h2>
+<% else %>
+	<h1>Subcategories</h1>
+<% end %>
+<table class="index">
 	<thead>
 		<tr>
 			<th>Name</th>	
-			<th>Brands</th>
-			<th></th>
+			<th>Modify</th>
+			
 		</tr>
 	</thead>
 
 <% @subcategories.each do |sub| %>
 	<tr>
-		<td><%= sub.name %></td>
-		<td><%= link_to "View Brands", admin_subcategory_brands_url(sub.id) %></td>
-		<td><%= link_to "Delete Subcategory", admin_subcategory_url(sub.id), :method => :delete %></td>
+		<td><%= link_to sub.name, admin_subcategory_url(sub.id) %></td>
+		<td>
+			<%= link_to "Edit", edit_admin_subcategory_url(sub.id) %> | 
+			<%= link_to "Delete Subcategory", admin_subcategory_url(sub.id), :method => :delete %>
+		</td>
 	</tr>
 <% end %>
+<div id="actions">
+	<ul>		
+		<li>
+			<% if !@category.nil? %>
+				<%= link_to image_tag('/images/admin/plus.png', :border => 0) + " Add Subcategory", new_admin_category_subcategory_url(@category) %>
+			<% else %>
+				<%= link_to image_tag('/images/admin/plus.png', :border => 0) + " Add Subcategory", new_admin_subcategory_url %>
+			<% end %>
+				
+		</li>
+	</ul>
+</div>
 
 </table>

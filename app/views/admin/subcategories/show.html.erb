@@ -1,7 +1,15 @@
-<h1><%= @subcategory.name%></h1>
-<h2>Category: <%= @subcategory.category.name %></h2>
+<% include_stylesheet 'admin/products' %>
+
+<h1>
+	<%= @subcategory.name%>
+	<span style="font-size:60%">
+		(Belongs To <%= @subcategory.category.name %>)		
+	</span>
+	<%= link_to "(Edit)", edit_admin_subcategory_url(@subcategory), :class => "product-edit" %>
+</h1>
+
 <% if !@subcategory.brands.empty? %>
-	<table>
+	<table class="index">
 		<thead>
 			<tr>
 				<th>Brand</th>
@@ -20,5 +28,17 @@
 	<% end%>
 	</table>
 <% else %>
-<%= link_to "Add New Brand", new_admin_subcategory_brand_url(@subcategory.id) %> | <%= link_to "Edit Subcategory", edit_admin_subcategory_url(@subcategory.id) %>
+<p>
+	No brands associated with this subcategory. Please <%= link_to "Add a Brand", new_admin_subcategory_brand_url(@subcategory.id) %>
+	</p> 
 <% end %>
+<div id="actions">
+	<ul>		
+		<li>
+			<%= link_to image_tag('/images/admin/minus.png', :border => 0) + " Remove Subcategory", admin_subcategory_url(@subcategory), :method => :delete %>
+		</li>
+		<li>
+			<%= link_to image_tag('/images/admin/plus.png', :border => 0) + " Add Brand", new_admin_subcategory_brand_url(@subcategory.id) %>
+		</li>
+	</ul>
+</div>

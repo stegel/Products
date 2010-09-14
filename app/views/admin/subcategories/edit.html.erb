@@ -1,3 +1,6 @@
+<% include_stylesheet 'admin/products' %>
+
+<h1>Edit Subcategory</h1>
 <% form_for :subcategory, :url => admin_subcategory_url(@subcategory),  :html => { :method => "put"} do |f| %>
 
 <%= render :partial => "form", :locals => {:f => f, :subcategory => @subcategory, :brands => @brands} %>
