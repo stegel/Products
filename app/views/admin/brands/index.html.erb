@@ -1,4 +1,7 @@
-<table>
+<% include_stylesheet 'admin/products' %>
+
+<h1>Brands</h1>
+<table class="index">
 	<thead>
 		<tr>
 			<th>Brand</th>
@@ -9,9 +12,18 @@
 
 <% @brands.each do |brand| %>
 	<tr>
-		<td><%= brand.name%></td>
+		<td><%= link_to brand.name, admin_brand_url(brand.id) %></td>
 		<td><%= link_to brand.website, brand.website %></td>
-		<td><%= link_to "Edit", edit_admin_brand_url(brand.id) %> | <%= link_to "Delete", admin_brand_url(brand.id), :method => :delete %></td>
+		<td><%= link_to "Edit", edit_admin_brand_url(brand.id) %> | <%= link_to "Delete", admin_brand_url(brand.id), :confirm => "This will remove the brand from all subcategories", :method => :delete %></td>
 	</tr>
 <% end%>
 </table>
+
+<div id="actions">
+	<ul>		
+		<li>
+			<%= link_to image_tag('/images/admin/plus.png', :border => 0) + " Add Brand", new_admin_brand_url %>
+				
+		</li>
+	</ul>
+</div>

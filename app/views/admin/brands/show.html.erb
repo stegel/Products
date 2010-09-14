@@ -1,7 +1,9 @@
-<%= @brand.name %><br />
-<%= link_to @brand.website, @brand.website %>
-<h2>Subcategories</h2>
-<table>
+<% include_stylesheet 'admin/products' %>
+
+<h1><%= @brand.name %><%= link_to "(Edit)", edit_admin_brand_url(@brand), :class => "product-edit" %></h1>
+<h2><%= link_to @brand.website, @brand.website %></h2>
+<h2 style="margin: 10px 0 0 0;">Subcategories</h2>
+<table class="index">
 	<thead>
 		<tr>
 			<th>Subcategory</th>
@@ -15,5 +17,10 @@
 	</tr>
 <% end %>
 </table>		
-
-<%= link_to "Edit Info", edit_admin_brand_url(@brand.id) %>
+<div id="actions">
+	<ul>		
+		<li>
+			<%= link_to image_tag('/images/admin/minus.png', :border => 0) + " Delete Brand", admin_brand_url(@brand), :confirm => "This will remove the brand from all subcategories", :method => :delete %>
+		</li>		
+	</ul>
+</div>

@@ -40,6 +40,7 @@ class Admin::BrandsController < ApplicationController
       flash[:notice] = "Brand was successfully created"
       redirect_to(admin_brand_url(@brand))
     else
+      @subcategories = Subcategory.find(:all)
       render :new
     end
   end
@@ -58,14 +59,23 @@ class Admin::BrandsController < ApplicationController
   end
   
   def destroy
-    subcategory = Subcategory.find(params[:subcategory_id])
-    respond_to do |format|
-      if subcategory.brands.delete(Brand.find(params[:id]))
-        format.html { redirect_to(admin_subcategory_url(subcategory), :notice => "Brand was successfully removed.")}
-        format.xml { head :ok}
+    if(params[:subcategory_id])
+      subcategory = Subcategory.find(params[:subcategory_id])
+      respond_to do |format|
+        if subcategory.brands.delete(Brand.find(params[:id]))
+          format.html { redirect_to(admin_subcategory_url(subcategory), :notice => "Brand was successfully removed.")}
+          format.xml { head :ok}
+        end
+      end
+    else
+      brand = Brand.find(params[:id])
+      respond_to do |format|
+        if brand.delete
+          format.html { redirect_to(admin_brands_url, :notice => "Brand was successfully removed.")}
+          format.xml { head :ok}
+        end
       end
     end
-    
   end
   
 

@@ -1,12 +1,20 @@
-<%= f.label "Name" %>
-<%= f.text_field :name %><br />
-<%= f.label "Website" %>
-<%= f.text_field :website %><br />
+<p>
+	<%= f.label "Name" %>
+	<%= f.text_field :name %><br />
+</p>
+<p>
+	<%= f.label "Website" %>
+	<%= f.text_field :website %><br />
+</p>
+<p>
 <h2>Select Subcategories</h2>
 <% subcategories.each do |subcategory| %>
 	<%= check_box_tag "brand[subcategory_ids][]", subcategory.id, @brand.subcategories.include?(subcategory) %>
-	<%= subcategory.name %>
+	<%= subcategory.name %><br />
 <% end%>
-<br />
+</p>
 
-<%= f.submit %>
+<p class="buttons">
+		<%= submit_tag "Save Brand", :class => "button" %> or 
+		<%= link_to "Cancel", admin_brands_url %>
+	</p>

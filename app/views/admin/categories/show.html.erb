@@ -27,7 +27,7 @@
 <div id="actions">
 	<ul>		
 		<li>
-			<%= link_to image_tag('/images/admin/minus.png', :border => 0) + " Remove Category", admin_category_url(@category), :method => :delete %>
+			<%= link_to image_tag('/images/admin/minus.png', :border => 0) + " Delete Category", admin_category_url(@category), :method => :delete %>
 		</li>
 		<li>
 			<%= link_to image_tag('/images/admin/plus.png', :border => 0) + " Add Subcategory", new_admin_category_subcategory_url(@category.id) %>
