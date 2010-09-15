@@ -2,7 +2,7 @@ class CreateSubcategories < ActiveRecord::Migration
   def self.up
     create_table :subcategories do |t|
 	t.string :name
-	t.string :category_id
+	t.integer :category_id
 	t.string :photoset_id
       t.timestamps
     end

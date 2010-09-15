@@ -4,7 +4,12 @@ ActionController::Routing::Routes.draw do |map|
   # end
   map.namespace :admin do |admin|
     admin.resources :categories, :has_many => :subcategories
-    admin.resources :subcategories, :has_many => :brands, :has_and_belongs_to_many => :brands
-    admin.resources :brands, :has_many => :subcategories,:has_and_belongs_to_many => :subcategories
+	admin.resources :subcategories do |subcategories|
+		subcategories.resources :brands
+	end
+
+	admin.resources :brands do |brands|
+		brands.resources :subcategories
+	end
   end
 end
