@@ -6,7 +6,7 @@ class ProductPage< Page
 	tag "products" do |tag|
 		category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
 		
-		subcategories = Subcategory.find(:all, :conditions => "category_id = #{category}")
+		subcategories = Subcategory.find(:all, :conditions => "category_id = #{category}", :order => :name)
 		result = []
 		subcategories.each do |subcategory|
 			tag.locals.data = subcategory
@@ -71,6 +71,14 @@ class ProductPage< Page
 
 	tag "brand_link" do |tag|
 		%{<a href="#{tag.locals.data.website}">#{tag.locals.data.name}</a>}
+	end
+
+	tag "brand_more" do |tag|
+		category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
+		
+		if tag.locals.data.brands.count >14
+		'<a href="/product-showcase/brands/#{category}">More...</a>'
+		end
 	end
 end
 

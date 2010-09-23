@@ -3,7 +3,7 @@
 <h1>
 	<%= @subcategory.name%>
 	<span style="font-size:60%">
-		(Belongs To <%= @subcategory.category.name %>)		
+		(Belongs To <%= link_to @subcategory.category.name, admin_category_url(@subcategory.category.id)  %>)		
 	</span>
 	<%= link_to "(Edit)", edit_admin_subcategory_url(@subcategory), :class => "product-edit" %>
 </h1>
@@ -22,7 +22,7 @@
 	<% @subcategory.brands.each do |brand| %>
 		<tr>
 			<td><%= brand.name%></td>
-			<td><%= brand.website %></td>
+			<td><%= link_to brand.website, brand.website %></td>
 			<td><%= link_to "View Brand", admin_brand_url(brand.id) %> | <%= link_to "Remove Brand",  admin_subcategory_brand_url(@subcategory.id,brand.id), :method => :delete %></td>
 		</tr>
 	<% end%>

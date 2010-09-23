@@ -12,7 +12,7 @@ class ProductsExtension < Radiant::Extension
     #   add_item "Products", "/admin/products", :after => "Pages"
     # end
 	tab 'Manage Site' do
-		add_item('Products','/admin/categories')
+		add_item('Categories','/admin/categories')
     add_item('Subcategories','/admin/subcategories')
     add_item('Brands','/admin/brands')
 	end
