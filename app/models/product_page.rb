@@ -98,8 +98,7 @@ class ProductPage< Page
     
     if tag.locals.data.brands.count > limit 
 		  
-      category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
-			%{<a href="#{self.url}#{category}/brands">More...</a>}
+			%{<a href="#{self.url}#{tag.locals.data.id}/brands">More...</a>}
       
     end
 	end
