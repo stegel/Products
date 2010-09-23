@@ -1,3 +1,5 @@
+require "net/http"
+require "uri"
 class ProductPage< Page
 	description %{
 		A product page lists all subcategories and their included brands
