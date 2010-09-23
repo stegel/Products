@@ -2,6 +2,21 @@ class ProductPage< Page
 	description %{
 		A product page lists all subcategories and their included brands
 	}
+  
+  def child_url(child)
+  
+
+    clean_url "#{ url }/"
+  end
+
+  def find_by_url(url, live = true, clean = false)
+    url = clean_url(url) if clean
+    if url =~ %r{^#{ self.url }(\d{1,6})/brands/?$}
+      children.find_by_class_name('BrandsPage')
+    else
+      super
+    end
+  end
 
 	tag "products" do |tag|
 		category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
@@ -23,6 +38,8 @@ class ProductPage< Page
 		category.name
 	end
 
+	
+		
 	tag "subcategory_name" do |tag|
 		tag.locals.data.name
 	end
@@ -72,13 +89,13 @@ class ProductPage< Page
 	tag "brand_link" do |tag|
 		%{<a href="#{tag.locals.data.website}">#{tag.locals.data.name}</a>}
 	end
-
+	
 	tag "brand_more" do |tag|
 		category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
-		
-		if tag.locals.data.brands.count >14
-		'<a href="/product-showcase/brands/#{category}">More...</a>'
-		end
+				
+		%{<a href="#{self.url}#{category}/brands">More...</a>}
 	end
+
+	
 end
 

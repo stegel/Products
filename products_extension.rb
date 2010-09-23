@@ -18,6 +18,7 @@ class ProductsExtension < Radiant::Extension
 	end
 	ProductPage
 	CategoryPage
+  BrandsPage
 	Page.class_eval do
 		include ProductTags
 	end
