@@ -91,9 +91,15 @@ class ProductPage< Page
 	end
 	
 	tag "brand_more" do |tag|
-		category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
-				
-		%{<a href="#{self.url}#{category}/brands">More...</a>}
+   
+    limit = tag.attr['limit'].to_i
+    
+    if tag.locals.data.brands.count > limit 
+		  
+      category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
+			%{<a href="#{self.url}#{category}/brands">More...</a>}
+      
+    end
 	end
 
 	
