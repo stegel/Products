@@ -5,12 +5,14 @@
 	<thead>
 		<tr>
 			<th>Category</th>
+			<th>Photoset</th>
 			<th>Modify</th>
 		</tr>
 	</thead>
 <% @categories.each do |category| %>
 	<tr>
 		<td><%= link_to category.name, admin_category_url(category) %></td>
+		<td><%= category.photoset %></td>
 		<td class="product-modify"><%= link_to "Edit", edit_admin_category_url(category)  %> </td>
 	</tr>
 <% end %>

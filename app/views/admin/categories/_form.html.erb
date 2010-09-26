@@ -7,6 +7,14 @@
 		<%= f.label 'Description' %>
 		<%= f.text_area :description, :rows => 5, :cols => 45%>
 	</p>
+	<p>
+		<label>Photoset</label>
+		<select name="category[photoset_id]">
+		<% category.photosets.each do |set|%>
+			<option value="<%= set['id']%>"><%= set['title']%></option>
+		<% end %>
+		</select>		
+	</p>
 	<p class="buttons">
 		<%= submit_tag "Save Category", :class => "button" %> or 
 		<%= link_to "Cancel", admin_categories_url %>

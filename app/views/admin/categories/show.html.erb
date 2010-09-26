@@ -2,7 +2,7 @@
 
 <h1><%= @category.name %><%= link_to "(Edit)", edit_admin_category_url(@category), :class => "product-edit" %></h1>
 <p><%= @category.description %></p>
-
+<p>Photoset Name: <%= @category.photoset %></p>
 <% if !@category.subcategories.empty? %>
 <h2>Subcategories</h2>
 <table class="index">

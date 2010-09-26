@@ -27,6 +27,7 @@ class ProductPage< Page
 		result = []
 		subcategories.each do |subcategory|
 			tag.locals.data = subcategory
+      tag.locals.category = Category.find_by_id(category)
 			result << tag.expand
 		end
 		result
@@ -40,6 +41,9 @@ class ProductPage< Page
 		category.name
 	end
 
+  tag "photoset_id" do |tag|
+    tag.locals.category.photoset_id
+  end
 	
 		
 	tag "subcategory_name" do |tag|
@@ -49,7 +53,7 @@ class ProductPage< Page
 	tag "image" do |tag|
 		output = ''
 		
-		url = "http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&photoset_id=#{tag.locals.data.photoset_id}+&api_key=6f977fc52e81b8f45764d91ab84999c2&format=json&nojsoncallback=1"	
+		url = "http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&photoset_id=#{tag.locals.category.photoset_id}+&api_key=6f977fc52e81b8f45764d91ab84999c2&format=json&nojsoncallback=1"	
 		json = Net::HTTP.get(URI.parse(url))
 
 		result = ActiveSupport::JSON.decode(json)
