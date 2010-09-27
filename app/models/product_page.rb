@@ -5,13 +5,17 @@ class ProductPage< Page
 		A product page lists all subcategories and their included brands
 	}
   
-  def child_url(child)
+  def cache?
+    false
+  end
   
-
+  def child_url(child)
     clean_url "#{ url }/"
+     
   end
 
   def find_by_url(url, live = true, clean = false)
+   
     url = clean_url(url) if clean
     if url =~ %r{^#{ self.url }(\d{1,6})/brands/?$}
       children.find_by_class_name('BrandsPage')
@@ -19,31 +23,45 @@ class ProductPage< Page
       super
     end
   end
+  
+  def category
+    id = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
+    
+    category = Category.find_by_id(id)
+    
+  end
+  
+  def photoset_id
+    category.photoset_id
+  end
 
+ 
+  tag "photoset_id" do |tag|
+    photoset_id
+  end
+  
+  tag "name" do |tag|
+    category.name
+  end
+
+  
+  
 	tag "products" do |tag|
-		category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
-		
-		subcategories = Subcategory.find(:all, :conditions => "category_id = #{category}", :order => :name)
+	
+		subcategories = category.subcategories.find(:all, :order => :name)
+    
 		result = []
+    
 		subcategories.each do |subcategory|
+        
 			tag.locals.data = subcategory
-      tag.locals.category = Category.find_by_id(category)
+      
 			result << tag.expand
 		end
 		result
 	end
 
-	tag "category" do |tag|
-		category = $1 if request_uri =~ %r{^#{self.url}(\d{1,6})/?$}
 
-		category = Category.find_by_id(category)
-
-		category.name
-	end
-
-  tag "photoset_id" do |tag|
-    tag.locals.category.photoset_id
-  end
 	
 		
 	tag "subcategory_name" do |tag|
@@ -53,7 +71,7 @@ class ProductPage< Page
 	tag "image" do |tag|
 		output = ''
 		
-		url = "http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&photoset_id=#{tag.locals.category.photoset_id}+&api_key=6f977fc52e81b8f45764d91ab84999c2&format=json&nojsoncallback=1"	
+		url = "http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&photoset_id=#{photoset_id}+&api_key=6f977fc52e81b8f45764d91ab84999c2&format=json&nojsoncallback=1"	
 		json = Net::HTTP.get(URI.parse(url))
 
 		result = ActiveSupport::JSON.decode(json)
@@ -75,7 +93,7 @@ class ProductPage< Page
 	end
 
 	tag "brands" do |tag|
-		brands = tag.locals.data.brands
+		brands = tag.locals.data.brands.find(:all, :order => :name)
 
 		result = []
 		
@@ -107,6 +125,9 @@ class ProductPage< Page
     end
 	end
 
-	
+	def init
+    
+  end
+
 end
 
