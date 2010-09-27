@@ -120,7 +120,7 @@ class ProductPage< Page
     
     if tag.locals.data.brands.count > limit 
 		  
-			%{<a href="#{self.url}#{tag.locals.data.id}/brands">More...</a>}
+			%{<a target="_blank" href="#{self.url}#{tag.locals.data.id}/brands">More...</a>}
       
     end
 	end
