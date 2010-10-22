@@ -111,7 +111,7 @@ class ProductPage< Page
 	end
 
 	tag "brand_link" do |tag|
-		%{<a href="#{tag.locals.data.website}">#{tag.locals.data.name}</a>}
+		%{<a target="_blank" href="#{tag.locals.data.website}">#{tag.locals.data.name}</a>}
 	end
 	
 	tag "brand_more" do |tag|
