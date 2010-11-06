@@ -31,7 +31,7 @@ class CategoryPage < Page
     
     unless result['stat'] == "fail" 
       set = result['collections']['collection'][0]['set']
-      index = rand(set.length+1)
+      index = rand(set.length)
       
       photoset_id = set[index]['id']
       
@@ -43,7 +43,7 @@ class CategoryPage < Page
     
       unless result['stat'] == "fail" 
         photoset = result['photoset']['photo']
-        photo = photoset[rand(photoset.length+1)]
+        photo = photoset[rand(photoset.length)]
         src = "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}_m.jpg"
        
         output = "<img src=#{src} alt='Random Photo' />"
