@@ -45,6 +45,25 @@ class ProductPage< Page
   end
 
   
+  tag "a_photo" do |tag|
+    output = ''
+    
+    set_url = "http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&photoset_id=#{photoset_id}&api_key=6f977fc52e81b8f45764d91ab84999c2&format=json&nojsoncallback=1"
+      
+    json = Net::HTTP.get(URI.parse(set_url))
+
+    result = ActiveSupport::JSON.decode(json)
+  
+    unless result['stat'] == "fail" 
+      photoset = result['photoset']['photo']
+      photo = photoset[rand(photoset.length)]
+      src = "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}_m.jpg"
+     
+      output = "<img src=#{src} alt='Random Photo' />"
+    else
+      output = "<img src='/images/home__mainimage.jpg'  style='margin: -45px 0 0 0;'/>"
+    end
+  end
   
 	tag "products" do |tag|
 	
