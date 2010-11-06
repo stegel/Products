@@ -44,7 +44,7 @@ class CategoryPage < Page
       unless result['stat'] == "fail" 
         photoset = result['photoset']['photo']
         photo = photoset[rand(photoset.length+1)]
-        src = "http://farm#{photoset[0]['farm']}.static.flickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}_m.jpg"
+        src = "http://farm#{photo['farm']}.static.flickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}_m.jpg"
        
         output = "<img src=#{src} alt='Random Photo' />"
       end
